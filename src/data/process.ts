@@ -161,7 +161,7 @@ export const processData: ProcessData = {
           department: "Thu ngân",
           subtitle: "> 5 triệu BẮT BUỘC CK · phiếu ký tay",
           detail:
-            "Mi Hồng thanh toán cho khách theo quy tắc: (a) Giao dịch > 5 triệu đồng BẮT BUỘC chuyển khoản (policy nội bộ Mi Hồng). Thông tin tài khoản đã lấy ở bước 2 KYC — thu ngân chọn từ dropdown, không nhập lại. (b) Giao dịch ≤ 5 triệu: tiền mặt hoặc CK tùy khách chọn. Hệ thống sinh phiếu thu mua (PTM) có QR, in 2 BẢN GIẤY (khách + Mi Hồng). Khách KÝ TAY trực tiếp trên phiếu giấy (không ký số/ký điện tử trên tablet). Mỗi bên giữ 1 bản có chữ ký tay. Nếu tổng ≥ 400 triệu VNĐ: tự đưa vào danh sách chờ CTR NHNN + bổ sung nghề nghiệp, nguồn gốc vàng.",
+            "Ngưỡng pháp lý: ≥ 5 triệu/ngày/khách BẮT BUỘC CK (ND 320/2025/ND-CP). TK đích lấy từ bước 2. Phiếu thu mua (PTM) in 2 bản giấy, khách KÝ TAY trên phiếu. ≥ 400M: đưa vào danh sách chờ CTR + bổ sung nghề nghiệp, nguồn gốc.",
           tools: [
             "Phần mềm thu mua",
             "Máy in phiếu A5",
@@ -177,10 +177,9 @@ export const processData: ProcessData = {
             "Flag CTR nếu ≥ 400M",
           ],
           controls: [
-            "Chính sách Mi Hồng: > 5 triệu BẮT BUỘC CK (không ghi đè)",
-            "Luật PCRT: ≥ 400M/ngày/CCCD → CTR NHNN trong 1 ngày",
-            "NĐ 24: lưu hồ sơ thu mua ≥ 5 năm",
-            "Phiếu gốc có chữ ký tay là chứng từ pháp lý — lưu bản cứng",
+            "ND 320/2025/ND-CP: ≥ 5M bắt buộc CK",
+            "PCRT: ≥ 400M → CTR",
+            "Lưu phiếu bản cứng",
           ],
           risks: [
             "Nguy cơ: khách chia nhỏ né 400M → cảnh báo structuring (cộng dồn CCCD/ngày)",
@@ -190,9 +189,9 @@ export const processData: ProcessData = {
           kind: "intake",
           shape: "rect",
           accounting:
-            "GHI NHẬN BÚT TOÁN THU MUA (auto từ sự kiện ký PTM): Nợ 156 (Hàng hóa) / Có 111 (nếu TM) hoặc Có 112 (nếu CK). Link bút toán với: PTM + Session ID + CCCD + mã GD ngân hàng (nếu CK). SCAN PHIẾU PTM có chữ ký tay lưu hệ thống, giữ bản cứng theo thứ tự PTM trong tủ lưu. Nếu GD ≥ 400M: flag đưa vào danh sách CTR để báo cáo NHNN trong 24h. Cuối ca: kế toán viên REVIEW bút toán (không sửa, chỉ duyệt). Bất thường → báo KTT.",
+            "GHI NHẬN BÚT TOÁN THU MUA (auto từ sự kiện ký PTM): Nợ 152 (Nguyên vật liệu) / Có 331. Link bút toán với: PTM + Session ID + CCCD + mã GD ngân hàng (nếu CK). SCAN PHIẾU PTM có chữ ký tay lưu hệ thống, giữ bản cứng theo thứ tự PTM trong tủ lưu. Nếu GD ≥ 400M: flag đưa vào danh sách CTR để báo cáo NHNN trong 24h. Cuối ca: kế toán viên REVIEW bút toán (không sửa, chỉ duyệt). Bất thường → báo KTT.",
           accountingDocs: [
-            "PHIẾU THU MUA (PTM) 2 BẢN GIẤY có chữ ký tay khách — CHỨNG TỪ GỐC CHÍNH (lưu 5+ năm theo NĐ 24)",
+            "PHIẾU THU MUA (PTM) 2 BẢN GIẤY có chữ ký tay khách — CHỨNG TỪ GỐC CHÍNH (lưu 5+ năm theo NĐ 24) kèm BẢNG KÊ THU MUA HÀNG HÓA, DỊCH VỤ theo mẫu 02 theo TT20/2026/TT-BTC",
             "Ủy nhiệm chi điện tử từ NH Mi Hồng (nếu CK) — chứng từ thanh toán",
             "Phiếu chi tiền mặt (nếu TM) — in từ phần mềm",
             "Bản scan PTM đã ký upload hệ thống",
@@ -233,7 +232,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "NẾU PHẢI BỔ SUNG / HOÀN TIỀN do chênh lệch: Kế toán ghi bút toán điều chỉnh: • Trả dư (Mi Hồng đưa thêm cho khách): Nợ 156 / Có 111 hoặc 112. • Trả thiếu (Mi Hồng thu lại từ khách): Có 156 / Nợ 111 hoặc 112. Liên kết với PTM gốc và phiếu điều chỉnh có chữ ký tay của khách. Nếu lệch lớn: cập nhật lại flag CTR (nếu qua/dưới ngưỡng 400M sau điều chỉnh).",
+            "NẾU PHẢI BỔ SUNG / HOÀN TIỀN do chênh lệch: Kế toán ghi bút toán điều chỉnh: • Trả dư (Mi Hồng đưa thêm cho khách): Nợ 152 / Có 111 hoặc 112. • Trả thiếu (Mi Hồng thu lại từ khách): Nợ 111 hoặc 112 / Có 152. Liên kết với PTM gốc và phiếu điều chỉnh có chữ ký tay của khách. Nếu lệch lớn: cập nhật lại flag CTR (nếu qua/dưới ngưỡng 400M sau điều chỉnh).",
           accountingDocs: [
             "KHI LỆCH (nếu có):",
             "Biên bản chênh lệch cân/tuổi có chữ ký thủ kho + thu ngân + QL",
@@ -314,7 +313,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "Theo dõi HAO VÀNG trong sơ chế (thường không đáng kể, nhưng nếu > 0,1% phải log). Cuối tháng: tổng hao sơ chế ghi vào chi phí sản xuất chung (627) để điều chỉnh giá vốn.",
+            "Theo dõi HAO VÀNG trong sơ chế (thường không đáng kể, nhưng nếu > 0,1% phải log). Cuối tháng: tổng hao sơ chế ghi vào chi phí sản xuất chung (627) để điều chỉnh giá thành.",
           accountingDocs: [
             "Phiếu theo dõi sơ chế (nội bộ) — ghi ID thợ, KL trước/sau, thời gian",
             "Biên bản hao vượt định mức (nếu > 0,1%) có chữ ký thợ + thủ kho",
@@ -353,7 +352,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "SKU tạo ra mang theo GIÁ VỐN từ bước 5 (giá thu mua) = cơ sở cho tính COGS + lãi gộp khi bán. Không phát sinh bút toán mới ở bước này — vàng vẫn ở TK 156.",
+            "SKU tạo ra mang theo GIÁ THÀNH từ bước 5 (giá thu mua) = cơ sở cho tính COGS + lãi gộp khi bán. Không phát sinh bút toán mới ở bước này — vàng vẫn ở TK 155.",
           accountingDocs: [
             "Phiếu nhập kho trưng bày (nội bộ) — ghi SKU + giá vốn + link PTM nguồn",
             "Tem SKU có QR (dán lên sản phẩm) — tham chiếu cho bảo hành / truy vết",
@@ -397,7 +396,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "TẠO GROUP ACCOUNTING: batch-ID được ghi nhận như 1 sub-ledger trong TK 156. Giá vốn của batch = tổng giá thu mua các Session đóng góp (đã hạch toán ở bước 5). Chưa phát sinh bút toán — chỉ gom logic.",
+            "TẠO GROUP ACCOUNTING: batch-ID được ghi nhận như 1 sub-ledger trong TK 152. Giá thành của batch = tổng giá thu mua các Session đóng góp (đã hạch toán ở bước 5). Chưa phát sinh bút toán — chỉ gom logic.",
           accountingDocs: [
             "Phiếu gom batch (nội bộ) — ghi batch-ID, tuổi, danh sách Session/PTM đóng góp, tổng KL\nLàm căn cứ truy xuất ngược khi cần",
           ],
@@ -472,7 +471,7 @@ export const processData: ProcessData = {
           kind: "warn",
           shape: "rect",
           accounting:
-            "GHI NHẬN HAO HỤT VÀO CHI PHÍ: bút toán Nợ 632 (Giá vốn) / Có 156 (Hàng hóa) cho phần vàng hao trong định mức. Phần hao VƯỢT định mức: Nợ 1381 (Tài sản thiếu chờ xử lý) / Có 156 — chờ kết luận giải trình. Nếu kết luận do lỗi thợ: chuyển Nợ 1388/334 (truy thu) / Có 1381.",
+            "GHI NHẬN HAO HỤT VÀO CHI PHÍ: bút toán Nợ 632 (Giá vốn) / Có 152 (Hàng hóa) cho phần vàng hao trong định mức. Phần hao VƯỢT định mức: Nợ 1381 (Tài sản thiếu chờ xử lý) / Có 152 — chờ kết luận giải trình. Nếu kết luận do lỗi thợ: chuyển Nợ 1388/334 (truy thu) / Có 1381.",
           accountingDocs: [
             "BIÊN BẢN NUNG — ghi KL vào/ra, % hao, ID thợ, ký bởi thợ + thủ kho + QL",
             "Biên bản giải trình hao vượt định mức (nếu có) + video camera xưởng đính kèm",
@@ -512,7 +511,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "TÍNH CHI PHÍ CÔNG CHẾ TÁC: Nợ 627 (Chi phí sản xuất chung) / Có 334 (Phải trả người lao động — lương thợ đúc theo sản phẩm) hoặc Có 111 (nếu thuê ngoài). Chi phí công sẽ được phân bổ vào giá vốn của SKU ở bước 11.",
+            "TÍNH CHI PHÍ CÔNG CHẾ TÁC: Nợ 627 (Chi phí sản xuất chung) / Có 334 (Phải trả người lao động — lương thợ đúc theo sản phẩm) hoặc Có 111 (nếu thuê ngoài). Chi phí công sẽ được phân bổ vào giá thành của SKU ở bước 11.",
           accountingDocs: [
             "Phiếu công chế tác / phiếu chấm công thợ theo sản phẩm (nội bộ)",
             "Kết quả XRF thành phẩm (đính kèm batch-ID)",
@@ -552,7 +551,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "TÍNH GIÁ VỐN CHO SKU MỚI: Giá vốn SKU = (Tổng giá mua của batch + chi phí công ở bước 10) / tổng KL ra × KL của SKU. Lưu giá vốn vào SKU để dùng khi bán (Sheet Bán hàng bước 7b). Cập nhật sổ chi tiết 156 theo từng SKU.",
+            "TÍNH GIÁ THÀNH CHO SKU MỚI: Giá thành SKU = (Tổng giá mua của batch + chi phí công ở bước 10) / tổng KL ra × KL của SKU. Lưu giá thành vào SKU để dùng khi bán (Sheet Bán hàng bước 7b). Cập nhật sổ chi tiết 155 theo từng SKU.",
           accountingDocs: [
             "Phiếu nhập kho trưng bày từ xưởng (nội bộ) — ghi từng SKU + giá vốn + link batch-ID",
             "Biên bản quyết toán batch — tổng KL vào, tổng KL ra, hao, danh sách SKU đúc ra, chi phí công\nChứng từ nội bộ kế toán, căn cứ phân bổ giá vốn",
@@ -700,7 +699,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "KIỂM TRA HĐ GTGT (đây là công việc chính của kế toán ở bước này): • Tra cứu MST NCC trên tracuunnt.gdt.gov.vn — MST còn hoạt động hay không. • Kiểm tra thông tin Mi Hồng trên HĐ đúng chuẩn. • Line item + KL + đơn giá + thành tiền + VAT (thường 10% với vàng trang sức gia công). • Khớp 100% với danh sách Mi Hồng chọn + cân thực tế. • Lệch bất kỳ: trả NCC điều chỉnh HĐ, KHÔNG ký nhận. • Đạt: ghi nhận HĐ vào hệ thống với trạng thái 'chờ hạch toán'.",
+            "KIỂM TRA HĐ GTGT (đây là công việc chính của kế toán ở bước này): • Tra cứu MST NCC trên tracuunnt.gdt.gov.vn — MST còn hoạt động hay không. • Kiểm tra thông tin Mi Hồng trên HĐ đúng chuẩn. • Line item + KL + đơn giá + thành tiền. • Khớp 100% với danh sách Mi Hồng chọn + cân thực tế. • Lệch bất kỳ: trả NCC điều chỉnh HĐ, KHÔNG ký nhận. • Đạt: ghi nhận HĐ vào hệ thống với trạng thái 'chờ hạch toán'.",
           accountingDocs: [
             "HÓA ĐƠN GTGT ĐIỆN TỬ của NCC — CHỨNG TỪ GỐC CHÍNH (lưu ≥ 10 năm theo NĐ 123/2020)",
             "Bản tra cứu MST NCC (screenshot từ tracuunnt.gdt.gov.vn) đính kèm",
@@ -886,7 +885,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "KIỂM TRA GIÁ VỐN: giá vốn SKU phải được kế thừa chính xác từ bước hạch toán thu mua (F2B 5) hoặc nhập B2B (B2B 5) + chi phí công (F2B Nung 10) nếu có. Kế toán trưởng duyệt cận biên lợi nhuận (không duyệt từng SKU mà duyệt policy). Lệch biên > 5% so với đề xuất → log audit trail để quyết toán.",
+            "KIỂM TRA GIÁ VỐN: giá thành SKU phải được kế thừa chính xác từ bước hạch toán thu mua (F2B 5) hoặc nhập B2B (B2B 5) + chi phí công (F2B Nung 10) nếu có. Kế toán trưởng duyệt cận biên lợi nhuận (không duyệt từng SKU mà duyệt policy). Lệch biên > 5% so với đề xuất → log audit trail để quyết toán.",
           accountingDocs: [
             "Bảng phê duyệt giá bán (nội bộ, có chữ ký/ký số QL duyệt)",
             "Chính sách biên lợi nhuận theo loại hàng (KTT duyệt, lưu làm policy)\nLàm căn cứ đối chiếu khi quyết toán lãi gộp",
@@ -1064,7 +1063,7 @@ export const processData: ProcessData = {
         {
           id: "ban-hang-5",
           order: "5",
-          title: "Lập hóa đơn GTGT điện tử",
+          title: "Lập hóa đơn bán hàng",
           department: "Thu ngân (auto) + kế toán review",
           subtitle: "HĐ NĐ 123 · ký số · gửi TCT ngay",
           detail:
@@ -1094,7 +1093,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "LÀ CÔNG VIỆC CỦA KẾ TOÁN (phối hợp với thu ngân): • Review chuỗi số HĐ cuối ca — đảm bảo liên tục, không nhảy số. • Kiểm tra VAT tính đúng thuế suất (thường 10% với vàng trang sức; 0% với vàng miếng nguyên chất). • Đảm bảo trạng thái 'đã gửi TCT' cho 100% HĐ trong ngày. HĐ fail → xử lý ngay. • KTT duyệt mẫu xác suất hàng tuần.",
+            "LÀ CÔNG VIỆC CỦA KẾ TOÁN (phối hợp với thu ngân): • Review chuỗi số HĐ cuối ca — đảm bảo liên tục, không nhảy số. • Đảm bảo trạng thái 'đã gửi TCT' cho 100% HĐ trong ngày. HĐ fail → xử lý ngay. • KTT duyệt mẫu xác suất hàng tuần.",
           accountingDocs: [
             "HÓA ĐƠN GTGT ĐIỆN TỬ BÁN RA — CHỨNG TỪ GỐC CHÍNH (lưu ≥ 10 năm theo NĐ 123)",
             "Mã tra cứu HĐ gửi khách qua Zalo/email",
@@ -1197,7 +1196,7 @@ export const processData: ProcessData = {
           kind: "process",
           shape: "rect",
           accounting:
-            "BÚT TOÁN TỰ ĐỘNG (kế toán review + duyệt, không gõ tay): • Doanh thu: Nợ 111 hoặc 112 (theo phương thức TT ở bước 6) / Có 511 (Doanh thu) + Có 3331 (VAT đầu ra). • Giá vốn: Nợ 632 (Giá vốn hàng bán) / Có 156 (Hàng hóa).   Giá vốn = lấy từ SKU (đã set ở bước hạch toán thu mua/nhập). FIFO theo batch-ID nếu policy FIFO. • Link bút toán: SKU + HĐ bán + mã GD NH + batch-ID nguồn + CCCD khách (nếu có). • Cuối ca kế toán REVIEW. KTT duyệt mẫu xác suất. • SKU không có batch-ID → block hạch toán, cảnh báo.",
+            "BÚT TOÁN TỰ ĐỘNG (kế toán review + duyệt, không gõ tay): • Doanh thu: Nợ 111 hoặc 112 (theo phương thức TT ở bước 6) / Có 511 (Doanh thu) + Có 3331 (VAT đầu ra). • Giá vốn: Nợ 632 (Giá vốn hàng bán) / Có 155, 156.   Giá vốn = lấy từ SKU (đã set ở bước hạch toán thu mua/nhập). FIFO theo batch-ID nếu policy FIFO. • Link bút toán: SKU + HĐ bán + mã GD NH + batch-ID nguồn + CCCD khách (nếu có). • Cuối ca kế toán REVIEW. KTT duyệt mẫu xác suất. • SKU không có batch-ID → block hạch toán, cảnh báo.",
           accountingDocs: [
             "Bút toán kép tự sinh trong phần mềm kế toán (không phải chứng từ giấy)",
             "Sổ chi tiết 511 (Doanh thu) + 632 (Giá vốn) cập nhật theo từng GD",

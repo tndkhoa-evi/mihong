@@ -23,3 +23,5 @@ v3dump.json
 *.tsbuildinfo
 .claude/
 plans/
+v3dump.json
+v4dump.json
