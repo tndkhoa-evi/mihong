@@ -12,6 +12,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
   const left = flows.find((f) => f.lane === "left");
   const right = flows.find((f) => f.lane === "right");
   const middle = flows.find((f) => f.lane === "middle");
+  const banHang = flows.find((f) => f.id === "ban-hang");
 
   const leftDiamond = left?.steps.find((s) => s.shape === "diamond");
   const leftSubflows = leftDiamond?.subflows
@@ -131,7 +132,64 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
           />
         )}
       </div>
+
+      {banHang && (
+        <>
+          <div className="flex justify-center">
+            <ConvergeDownArrow />
+          </div>
+          <div className="flex justify-center">
+            <LaneCard
+              flow={banHang}
+              accent="gold"
+              onClick={() => onLaneClick(banHang.id)}
+            />
+          </div>
+        </>
+      )}
     </div>
+  );
+}
+
+/** Vertical arrow between Hội tụ → Bán hàng */
+function ConvergeDownArrow() {
+  return (
+    <svg
+      width="24"
+      height="48"
+      viewBox="0 0 24 48"
+      aria-hidden
+      className="my-1"
+    >
+      <defs>
+        <marker
+          id="ov-down-arrow"
+          viewBox="0 0 10 10"
+          refX="9"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path
+            d="M1 1L9 5L1 9"
+            fill="none"
+            stroke="#8b1a1a"
+            strokeWidth="1.5"
+          />
+        </marker>
+      </defs>
+      <line
+        x1="12"
+        y1="0"
+        x2="12"
+        y2="44"
+        stroke="#8b1a1a"
+        strokeOpacity="0.55"
+        strokeWidth="2"
+        markerEnd="url(#ov-down-arrow)"
+      />
+    </svg>
   );
 }
 

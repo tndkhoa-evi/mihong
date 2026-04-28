@@ -59,7 +59,7 @@ export function LanePage() {
   return (
     <div
       className="min-h-screen bg-bg-base flex flex-col transition-[padding] duration-300"
-      style={{ paddingBottom: activeStep ? "72vh" : 0 }}
+      style={{ paddingBottom: activeStep ? "60vh" : 0 }}
     >
       <PresentationToolbar
         crumbs={crumbs}

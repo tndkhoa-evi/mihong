@@ -50,7 +50,7 @@ export function StepDetailPanel({
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 260 }}
             className={cn(
-              "fixed bottom-0 left-0 right-0 z-50 w-full h-[72vh]",
+              "fixed bottom-0 left-0 right-0 z-50 w-full h-[60vh]",
               "bg-bg-panel shadow-2xl border-t border-ink-subtle/20",
               "rounded-t-2xl flex flex-col",
             )}
