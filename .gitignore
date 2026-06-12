@@ -14,6 +14,8 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+# Brand config cho site "Cửa hàng vàng" — chỉ chứa tên + logo, không có secret
+!.env.cuahang
 
 .vite
 

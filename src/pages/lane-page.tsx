@@ -12,6 +12,7 @@ import { useZoomPan } from "@/hooks/use-zoom-pan";
 import { usePresentationMode } from "@/hooks/use-presentation-mode";
 import { useKeyboard } from "@/hooks/use-keyboard";
 import { getFlow, getStep, getStepIndex } from "@/data/validate";
+import { BRAND_DOC_TITLE } from "@/lib/brand";
 import type { Crumb } from "@/components/layout/breadcrumb";
 
 export function LanePage() {
@@ -22,7 +23,7 @@ export function LanePage() {
   const printRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     contentRef: printRef,
-    documentTitle: "Mi-Hong-quy-trinh",
+    documentTitle: BRAND_DOC_TITLE,
   });
 
   useKeyboard({

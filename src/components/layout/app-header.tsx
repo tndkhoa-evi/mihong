@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { processData } from "@/data/process";
+import { BRAND_LOGO, BRAND_NAME } from "@/lib/brand";
 
 export function AppHeader() {
   return (
@@ -9,8 +10,8 @@ export function AppHeader() {
       aria-label="Về trang chủ"
     >
       <img
-        src="/logo.png"
-        alt="Mi Hồng"
+        src={BRAND_LOGO}
+        alt={BRAND_NAME}
         className="w-10 h-10 object-contain"
         loading="eager"
       />

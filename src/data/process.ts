@@ -1,6 +1,7 @@
 import type { ProcessData } from "./types";
+import { withBrand } from "@/lib/brand";
 
-export const processData: ProcessData = {
+const rawProcessData: ProcessData = {
   meta: {
     title: "Mi Hồng",
     subtitle: "Quy trình thu mua → xử lý → lên kệ",
@@ -1235,3 +1236,5 @@ export const processData: ProcessData = {
     },
   ],
 };
+
+export const processData = withBrand(rawProcessData);
