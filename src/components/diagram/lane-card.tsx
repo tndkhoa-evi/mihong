@@ -8,6 +8,7 @@ interface LaneCardProps {
   flow: Flow;
   onClick: () => void;
   accent?: "brand" | "gold" | "neutral" | "intake" | "process";
+  stageLabel?: string;
   className?: string;
 }
 
@@ -43,6 +44,7 @@ export function LaneCard({
   flow,
   onClick,
   accent = "brand",
+  stageLabel,
   className,
 }: LaneCardProps) {
   const a = accentStyles[accent];
@@ -61,9 +63,24 @@ export function LaneCard({
       )}
     >
       <div className="flex items-start justify-between gap-4 mb-3">
-        <Badge variant="muted" className="text-[11px] uppercase tracking-wider">
-          {flow.steps.length} bước
-        </Badge>
+        <div className="flex items-center gap-2">
+          {stageLabel && (
+            <span
+              className={cn(
+                "text-[10px] font-bold uppercase tracking-widest",
+                a.icon,
+              )}
+            >
+              {stageLabel}
+            </span>
+          )}
+          <Badge
+            variant="muted"
+            className="text-[11px] uppercase tracking-wider"
+          >
+            {flow.steps.length} bước
+          </Badge>
+        </div>
         <ArrowRight
           className={cn(
             "w-5 h-5 transition-transform group-hover:translate-x-1",

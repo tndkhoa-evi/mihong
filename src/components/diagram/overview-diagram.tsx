@@ -28,6 +28,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
             <LaneCard
               flow={left}
               accent="intake"
+              stageLabel="GĐ 1 · Thu mua"
               onClick={() => onLaneClick(left.id)}
             />
           )}
@@ -36,7 +37,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
             <div className="flex flex-col items-end w-[380px]">
               <BranchArrow />
               <div className="text-[11px] font-semibold text-brand uppercase tracking-wide mb-2">
-                ↓ Rẽ nhánh sau bước {leftDiamond?.order}
+                GĐ 2 · Xử lý — rẽ nhánh sau bước {leftDiamond?.order}
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
                 {leftSubflows.map((sub) => (
@@ -57,6 +58,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
             <LaneCard
               flow={right}
               accent="intake"
+              stageLabel="GĐ 1 · Thu mua"
               onClick={() => onLaneClick(right.id)}
             />
             <StraightDownArrow />
@@ -128,6 +130,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
           <LaneCard
             flow={middle}
             accent="gold"
+            stageLabel="GĐ 3 · Lên kệ"
             onClick={() => onLaneClick(middle.id)}
           />
         )}
@@ -142,6 +145,7 @@ export function OverviewDiagram({ flows, onLaneClick }: OverviewDiagramProps) {
             <LaneCard
               flow={banHang}
               accent="gold"
+              stageLabel="GĐ 4 · Bán hàng"
               onClick={() => onLaneClick(banHang.id)}
             />
           </div>
