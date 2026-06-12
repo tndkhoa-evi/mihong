@@ -12,8 +12,14 @@ const SOURCE_BRAND = "Mi Hồng";
 export const BRAND_NAME: string =
   import.meta.env.VITE_BRAND_NAME || SOURCE_BRAND;
 
-export const BRAND_LOGO: string =
-  import.meta.env.VITE_BRAND_LOGO || "/logo.png";
+/** Logo dựng sẵn: VITE_BRAND_LOGO = 0 → logo các thỏi vàng */
+const PRESET_LOGOS: Record<string, string> = {
+  "0": "/logo-cua-hang-vang.svg",
+};
+
+const logoEnv = import.meta.env.VITE_BRAND_LOGO || "/logo.png";
+
+export const BRAND_LOGO: string = PRESET_LOGOS[logoEnv] ?? logoEnv;
 
 /** Tiêu đề tài liệu khi in / xuất PDF */
 export const BRAND_DOC_TITLE = `${BRAND_NAME} — quy trình`;
